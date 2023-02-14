@@ -1,0 +1,49 @@
+{
+    "name": "astro-dev-preview-routes",
+    "version": "0.0.1",
+    "type": "module",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.mjs"
+        },
+        "./package.json": "./package.json"
+    },
+    "types": "./dist/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/MoustaphaDev/astro-dev-preview-routes",
+        "directory": "packages/astro-dev-preview-routes"
+    },
+    "bugs": {
+        "url": "https://github.com/MoustaphaDev/astro-dev-preview-routes/issues"
+    },
+    "homepage": "https://github.com/MoustaphaDev/astro-dev-preview-routes/tree/main/packages/astro-dev-preview-routes/readme.md",
+    "files": [
+        "dist",
+        "CHANGELOG.md"
+    ],
+    "keywords": [
+        "withastro",
+        "preview",
+        "astro",
+        "astro-integration",
+        "astro-dev-preview"
+    ],
+    "author": {
+        "name": "Moustapha Kebe",
+        "email": "moustapha.happydev@gmail.com",
+        "url": "https://twitter.com/a_happydev"
+    },
+    "license": "MIT",
+    "packageManager": "pnpm@7.6.0",
+    "scripts": {
+        "prepack": "unbuild"
+    },
+    "peerDependencies": {
+        "astro": "^2.0.0"
+    },
+    "devDependencies": {
+        "unbuild": "^1.1.1"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "$schema": "https://unpkg.com/@changesets/config@2.3.0/schema.json",
+    "commit": false,
+    "baseBranch": "main",
+    "access": "public",
+    "updateInternalDependencies": "patch",
+    "changelog": [
+        "@changesets/changelog-github",
+        { "repo": "MoustaphaDev/astro-dev-preview-routes" }
+    ],
+    "ignore": ["@example/*"]
+}
