@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
-import astroDevPreviewRoutes from 'astro-dev-preview-routes';
+import astroDevPreviewRoutes from '../packages/integration/dist';
 
 // https://astro.build/config
 export default defineConfig({
-    integrations: astroDevPreviewRoutes(),
+    integrations: [astroDevPreviewRoutes()],
 });
