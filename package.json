@@ -1,15 +1,12 @@
 {
-    "name": "astro-dev-preview-routes",
+    "name": "root",
     "private": true,
     "type": "module",
     "scripts": {
         "start": "pnpm --filter demo run start",
-        "stub": "pnpm -r run prepack --stub",
-        "build": "pnpm -r run prepack",
+        "build": "turbo run build --filter=astro-dev-preview-routes --concurrency=1",
         "version": "changeset version && pnpm install --no-frozen-lockfile"
     },
-    "keywords": [],
-    "author": "NoustaphaDev",
     "devDependencies": {
         "@changesets/changelog-github": "^0.4.8",
         "@changesets/cli": "^2.26.0",
@@ -20,9 +17,5 @@
     },
     "peerDependencies": {
         "astro": "^2.0.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/MoustaphaDev/astro-dev-preview-routes.git"
     }
 }
