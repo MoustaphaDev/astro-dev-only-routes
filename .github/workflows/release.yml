@@ -3,7 +3,7 @@ name: CI
 on:
     push:
         branches:
-            - master
+            - main
     pull_request:
 
 permissions:
@@ -41,7 +41,7 @@ jobs:
                   node-version: 16
                   cache: 'pnpm'
             - if: ${{ steps.cache-node.outputs.cache-hit != 'true' }}
-                run: pnpm install
+              run: pnpm install
 
             - name: Build Packages
               run: pnpm run build
@@ -49,6 +49,7 @@ jobs:
             - name: Create Release Pull Request or Publish
               id: changesets
               uses: changesets/action@v1
+
               if: ${{ github.event_name != 'pull_request' }}
               with:
                   # Note: pnpm install after versioning is necessary to refresh lockfile
@@ -57,7 +58,7 @@ jobs:
                   commit: '[ci] release'
                   title: '[ci] release'
               env:
-                  # Needs access to push to master
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  # Needs access to push to main
+                  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
                   # Needs access to publish to npm
                   NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
