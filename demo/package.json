@@ -11,6 +11,6 @@
     },
     "dependencies": {
         "astro": "^2.0.10",
-        "astro-dev-preview-routes": "workspace:*"
+        "astro-dev-only-routes": "workspace:*"
     }
 }

@@ -21,12 +21,12 @@ importers:
   demo:
     specifiers:
       astro: ^2.0.10
-      astro-dev-preview-routes: workspace:*
+      astro-dev-only-routes: workspace:*
     dependencies:
       astro: 2.0.11
-      astro-dev-preview-routes: link:../packages/astro-dev-preview-routes
+      astro-dev-only-routes: link:../packages/integration
 
-  packages/astro-dev-preview-routes:
+  packages/integration:
     specifiers:
       astro: ^2.0.0
       unbuild: ^1.1.1
