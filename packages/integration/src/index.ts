@@ -14,7 +14,7 @@ function getVitePlugin(config: AstroConfig): Plugin | void {
     //     return;
     // }
     return {
-        name: 'vite-plugin-astro-dev-preview-routes',
+        name: 'vite-plugin-astro-dev-only-routes',
         enforce: 'pre',
         resolveId(id) {
             console.log({ id, devPreviewFolderPath });
@@ -33,7 +33,7 @@ function getVitePlugin(config: AstroConfig): Plugin | void {
 
 export default function integration(): AstroIntegration {
     return {
-        name: 'astro-dev-preview-routes',
+        name: 'astro-dev-only-routes',
         hooks: {
             'astro:config:setup': ({ injectRoute, updateConfig, config }) => {
                 updateConfig({

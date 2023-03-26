@@ -6,7 +6,7 @@
     "updateInternalDependencies": "patch",
     "changelog": [
         "@changesets/changelog-github",
-        { "repo": "MoustaphaDev/astro-dev-preview-routes" }
+        { "repo": "MoustaphaDev/astro-dev-only-routes" }
     ],
     "ignore": ["@example/*"]
 }

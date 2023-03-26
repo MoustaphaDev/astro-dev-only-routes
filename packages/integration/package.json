@@ -1,5 +1,5 @@
 {
-    "name": "astro-dev-preview-routes",
+    "name": "astro-dev-only-routes",
     "version": "0.0.1",
     "type": "module",
     "scripts": {
@@ -16,13 +16,13 @@
     "types": "./dist/index.d.ts",
     "repository": {
         "type": "git",
-        "url": "https://github.com/MoustaphaDev/astro-dev-preview-routes",
+        "url": "https://github.com/MoustaphaDev/astro-dev-only-routes",
         "directory": "packages/integration"
     },
     "bugs": {
-        "url": "https://github.com/MoustaphaDev/astro-dev-preview-routes/issues"
+        "url": "https://github.com/MoustaphaDev/astro-dev-only-routes/issues"
     },
-    "homepage": "https://github.com/MoustaphaDev/astro-dev-preview-routes/tree/main/packages/astro-dev-preview-routes/readme.md",
+    "homepage": "https://github.com/MoustaphaDev/astro-dev-only-routes/tree/main/packages/integration/readme.md",
     "files": [
         "dist",
         "CHANGELOG.md"
