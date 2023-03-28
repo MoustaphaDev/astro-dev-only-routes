@@ -8,5 +8,5 @@
         "@changesets/changelog-github",
         { "repo": "MoustaphaDev/astro-dev-only-routes" }
     ],
-    "ignore": ["@example/*"]
+    "ignore": ["demo"]
 }
