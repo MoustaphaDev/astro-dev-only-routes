@@ -23,7 +23,7 @@ importers:
   demo:
     specifiers:
       astro: ^2.1.7
-      astro-dev-only-routes: workspace:^0.0.2
+      astro-dev-only-routes: ^0.0.2
     dependencies:
       astro: 2.1.7
       astro-dev-only-routes: link:../packages/integration
