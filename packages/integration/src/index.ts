@@ -2,7 +2,8 @@ import type { AstroIntegration } from 'astro';
 import { fileURLToPath } from 'url';
 import { globbySync } from 'globby';
 import kleur from 'kleur';
-import treeify from 'treeify';
+import path from 'path';
+import slash from 'slash';
 
 // const pageExtRE = /\.(astro|mdx|md|tsx|ts|jsx|js)$/; Support later
 const pageExtRE = /\.astro$/;
@@ -59,10 +60,15 @@ export default function integration(): AstroIntegration {
                     // if (filename === 'index') {
                     //     filename = ''
                     // }
-                    const entryPoint = `${fileURLToPath(
-                        pagesDir
-                    )}/${DOUBLE_UNDERSCORE}${routePath}.astro`;
-                    const pattern = `/${pagesDirRelativePath}${routePath}`;
+                    const entryPoint = slash(
+                        path.join(
+                            fileURLToPath(pagesDir),
+                            `${DOUBLE_UNDERSCORE}${routePath}.astro`
+                        )
+                    );
+                    const pattern = slash(
+                        path.join(pagesDirRelativePath, routePath)
+                    );
 
                     injectRoute({
                         entryPoint,
@@ -109,7 +115,7 @@ function log(
 function foldersToConsumableTree(folders: string[]) {
     const tree = {};
     for (let folder of folders) {
-        const parts = folder.split('/');
+        const parts = folder.split(path.sep);
         const rootKey = parts.shift();
         if (!rootKey) {
             continue;
