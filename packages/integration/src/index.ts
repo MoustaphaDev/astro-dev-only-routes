@@ -29,7 +29,7 @@ export default function integration(): AstroIntegration {
                     }
                 );
                 if (devOnlyFiles.length === 0) {
-                    log('info', 'No dev-only routes found.');
+                    log('warn', 'No dev-only routes found.');
                     return;
                 }
                 const devOnlyRoutes = devOnlyFiles.map((route) => {
@@ -51,9 +51,14 @@ export default function integration(): AstroIntegration {
                 });
 
                 for (let { routePath, pagesDirRelativePath } of devOnlyRoutes) {
-                    if (routePath === 'index') {
-                        routePath = '';
-                    }
+                    // BUG in astro: deeply nested index.astro routes collide with root index.astro
+                    // Open an issue
+                    // const filename = routePath.slice(
+                    //     routePath.lastIndexOf('/') + 1
+                    // );
+                    // if (filename === 'index') {
+                    //     filename = ''
+                    // }
                     const entryPoint = `${fileURLToPath(
                         pagesDir
                     )}/${DOUBLE_UNDERSCORE}${routePath}.astro`;
@@ -66,16 +71,14 @@ export default function integration(): AstroIntegration {
                 }
 
                 const devOnlyRoutesCount = devOnlyRoutes.length;
-                const devOnlyRoutesTreeView = treeify.asTree(
-                    foldersToConsumableTree(devOnlyFiles),
-                    true,
-                    true
+                const devOnlyRoutesTreeView = createTreeView(
+                    foldersToConsumableTree(devOnlyFiles)
                 );
                 log(
                     'info',
                     `Found ${devOnlyRoutesCount} dev-only route${
                         devOnlyRoutesCount > 1 ? 's' : ''
-                    } . Here they are:\n${kleur.bold(devOnlyRoutesTreeView)}`
+                    }. Here they are:\n${kleur.bold(devOnlyRoutesTreeView)}`
                 );
             },
         },
@@ -85,9 +88,6 @@ export default function integration(): AstroIntegration {
 function log(
     type: 'info' | 'warn' | 'error',
     message: string,
-    /**
-     * If true, don't log anything. Errors should not be silenced.
-     */
     silent: boolean = false
 ) {
     if (silent) return;
@@ -97,10 +97,10 @@ function log(
             ? kleur.bgRed
             : type === 'warn'
             ? kleur.bgYellow
-            : kleur.bgCyan;
+            : kleur.bgMagenta;
     type === 'error';
     console.log(
-        `${kleur.gray(date)} ${bgColor(
+        `${kleur.gray(date)}\n${bgColor(
             kleur.bold('[astro-dev-only-routes]')
         )} ${message}`
     );
@@ -125,4 +125,33 @@ function addNestedKeys(obj: object, keys: string[]) {
         cursor[key] = cursor[key] || {};
         cursor = cursor[key];
     }
+}
+
+// TODO: make this
+function createTreeView(tree, indent = 0) {
+    const BRANCH = kleur.magenta('├─');
+    const HALF_BRANCH = kleur.magenta('└─');
+    const DOWN_TRIANGLE = '▼';
+
+    let result = '';
+    const keys = Object.keys(tree);
+    for (let i = 0; i < keys.length; i++) {
+        const key = keys[i];
+        const value = tree[key];
+        const isLastKey = i === keys.length - 1;
+        const maybeDownTriangle = isDir(value) ? DOWN_TRIANGLE : ' ';
+        const padding = '   '.repeat(indent);
+        const branch = isLastKey ? HALF_BRANCH : BRANCH;
+        result += `${padding} ${branch} ${maybeDownTriangle} ${key}\n`;
+        if (typeof value === 'object') {
+            result += createTreeView(value, indent + 1);
+        } else {
+            result += `${padding}${branch} ${value}\n`;
+        }
+    }
+    return result;
+}
+
+function isDir(tree) {
+    return Object.keys(tree).length > 0;
 }
