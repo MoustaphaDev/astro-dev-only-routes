@@ -1,1 +1,1 @@
-./readme.md
+./packages/integration/readme.md
