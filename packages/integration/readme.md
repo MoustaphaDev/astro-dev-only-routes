@@ -80,7 +80,7 @@ console.log('This page is only available in dev mode.')
 ```
 
 
-That's it! Now you can run `astro dev` and navigate to `http://localhost:3000/__secret-panel` to see the page.
+That's it! Now you can run `astro dev` and navigate to `http://localhost:3000/secret-panel` (without the __) to see the page.
 Try running `astro build` and you will see that the page is not included in the build.
 
 ## 🐛 Known Issues
